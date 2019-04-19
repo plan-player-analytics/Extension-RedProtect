@@ -22,9 +22,7 @@
 */
 package com.djrapitops.extension;
 
-import com.djrapitops.plan.extension.DataExtension;
 import com.djrapitops.plan.extension.extractor.ExtensionExtractor;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,18 +33,16 @@ import org.junit.jupiter.api.Test;
  */
 class ExtensionImplementationTest {
 
-    private ExtensionExtractor extractor;
-
-    @BeforeEach
-    void prepareExtractor() {
-        DataExtension extension = new NewExtension();
-        extractor = new ExtensionExtractor(extension);
+    @Test
+    @DisplayName("Bukkit version is implemented correctly")
+    void noImplementationErrorsBukkit() {
+        new ExtensionExtractor(new RedProtectBukkitExtension()).validateAnnotations();
     }
 
     @Test
-    @DisplayName("API is implemented correctly")
-    void noImplementationErrors() {
-        extractor.validateAnnotations();
+    @DisplayName("Bukkit version is implemented correctly")
+    void noImplementationErrorsSponge() {
+        new ExtensionExtractor(new RedProtectSpongeExtension()).validateAnnotations();
     }
 
 }
