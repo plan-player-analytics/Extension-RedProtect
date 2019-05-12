@@ -67,7 +67,8 @@ public class RedProtectBukkitExtension implements DataExtension {
             description = "Total area the player has claimed",
             iconName = "map",
             iconFamily = Family.REGULAR,
-            iconColor = Color.RED
+            iconColor = Color.RED,
+            showInPlayerTable = true
     )
     public long totalArea(UUID playerUUID) {
         return RedProtect.get().getAPI().getPlayerRegions(playerUUID.toString()).stream().mapToLong(Region::getArea).sum();
