@@ -48,11 +48,14 @@ public class RedProtectExtensionFactory {
     }
 
     public Optional<DataExtension> createExtension() {
-        if (isClassAvailable("br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect")) {
+        if (!isAvailable()) {
+            return Optional.empty();
+        }
+        if (isClassAvailable("org.bukkit.event.EventHandler")) {
             return Optional.of(new RedProtectBukkitExtension());
         }
-        if (isClassAvailable("br.net.fabiozumbi12.RedProtect.Sponge.RedProtect")) {
-            return Optional.of(new RedProtectBukkitExtension());
+        if (isClassAvailable("org.spongepowered.api.Sponge")) {
+            return Optional.of(new RedProtectSpongeExtension());
         }
         return Optional.empty();
     }
