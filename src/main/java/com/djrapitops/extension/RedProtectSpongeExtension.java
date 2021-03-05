@@ -1,5 +1,5 @@
 /*
-    Copyright(c) 2019 Risto Lahtela (Rsl1122)
+    Copyright(c) 2019 Risto Lahtela (AuroraLS3)
 
     The MIT License(MIT)
 
@@ -41,7 +41,7 @@ import java.util.UUID;
 /**
  * DataExtension for RedProtect Sponge.
  *
- * @author Rsl1122
+ * @author AuroraLS3
  */
 @PluginInfo(name = "RedProtect", iconName = "shield-alt", iconFamily = Family.SOLID, color = Color.RED)
 public class RedProtectSpongeExtension implements DataExtension {
