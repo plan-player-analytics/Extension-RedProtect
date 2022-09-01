@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.djrapitops</groupId>
+    <groupId>net.playeranalytics</groupId>
     <artifactId>Extension-RedProtect</artifactId>
-    <version>7.7.3-R0.1</version>
+    <version>7.7.3-R1.1</version>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -24,6 +24,10 @@
         <repository>
             <id>redprotect-repo</id>
             <url>https://raw.github.com/FabioZumbi12/RedProtect/mvn-repo/</url>
+        </repository>
+        <repository>
+            <id>sk89q-snapshots</id>
+            <url>https://maven.sk89q.com/repo/</url>
         </repository>
 
         <!-- Platforms -->
@@ -54,7 +58,7 @@
         <dependency> <!-- Plan API -->
             <groupId>com.djrapitops</groupId>
             <artifactId>plan-api</artifactId>
-            <version>5.2-R0.1</version>
+            <version>5.2-R0.9</version>
             <scope>provided</scope>
         </dependency>
 
@@ -62,12 +66,6 @@
         <dependency>
             <groupId>br.net.fabiozumbi12.RedProtect</groupId>
             <artifactId>RedProtect-Spigot</artifactId>
-            <version>7.7.3</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>br.net.fabiozumbi12.RedProtect</groupId>
-            <artifactId>RedProtect-Sponge-8</artifactId>
             <version>7.7.3</version>
             <scope>provided</scope>
         </dependency>
@@ -83,7 +81,7 @@
         <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>spongeapi</artifactId>
-            <version>7.1.0</version>
+            <version>8.0.0</version>
             <scope>provided</scope>
         </dependency>
         <!--<dependency>-->
@@ -103,18 +101,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.4.2</version>
+            <version>5.8.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.27.0</version>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>2.27.0</version>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

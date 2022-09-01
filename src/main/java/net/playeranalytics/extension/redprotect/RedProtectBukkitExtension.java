@@ -1,5 +1,5 @@
 /*
-    Copyright(c) 2019 Risto Lahtela (AuroraLS3)
+    Copyright(c) 2019 AuroraLS3
 
     The MIT License(MIT)
 
@@ -20,7 +20,7 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-package com.djrapitops.extension;
+package net.playeranalytics.extension.redprotect;
 
 import br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect;
 import br.net.fabiozumbi12.RedProtect.Bukkit.Region;
@@ -71,7 +71,14 @@ public class RedProtectBukkitExtension implements DataExtension {
             showInPlayerTable = true
     )
     public long totalArea(UUID playerUUID) {
-        return RedProtect.get().getAPI().getPlayerRegions(playerUUID.toString()).stream().mapToLong(Region::getArea).sum();
+        return RedProtect.get().getAPI().getPlayerRegions(playerUUID.toString()).stream().mapToLong(this::getArea).sum();
+    }
+
+    private int getArea(Region region) {
+        Location maxLocation = region.getMaxLocation();
+        Location minLocation = region.getMinLocation();
+        return Math.abs(maxLocation.getBlockX() - minLocation.getBlockX())
+                * Math.abs(maxLocation.getBlockZ() - minLocation.getBlockZ());
     }
 
     @TableProvider(tableColor = Color.RED)
@@ -86,12 +93,12 @@ public class RedProtectBukkitExtension implements DataExtension {
                 .columnThree("Area", Icon.called("map").of(Family.REGULAR).build());
 
         regions.stream()
-                .sorted((one, two) -> Integer.compare(two.getArea(), one.getArea()))
+                .sorted((one, two) -> Integer.compare(getArea(two), getArea(one)))
                 .forEach(region -> {
-                    int area = region.getArea();
+                    int area = getArea(region);
                     Location center = region.getCenterLoc();
                     String location = "x: " + center.getBlockX() + ", z: " + center.getBlockZ();
-                    String world = region.getWorld();
+                    String world = region.getCenterLoc().getWorld().getName();
                     table.addRow(location, world, area);
                 });
 

@@ -1,5 +1,5 @@
 /*
-    Copyright(c) 2019 Risto Lahtela (AuroraLS3)
+    Copyright(c) 2019 AuroraLS3
 
     The MIT License(MIT)
 
@@ -20,43 +20,23 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 */
-package com.djrapitops.extension;
+package net.playeranalytics.extension.redprotect;
 
-import com.djrapitops.plan.extension.DataExtension;
-
-import java.util.Optional;
+import com.djrapitops.plan.extension.extractor.ExtensionExtractor;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
- * Factory for DataExtension.
+ * Test for the implementation of the new extension
  *
  * @author AuroraLS3
  */
-public class RedProtectExtensionFactory {
+class ExtensionImplementationTest {
 
-    private boolean isAvailable() {
-        return isClassAvailable("br.net.fabiozumbi12.RedProtect.Bukkit.RedProtect") ||
-                isClassAvailable("br.net.fabiozumbi12.RedProtect.Sponge.RedProtect");
+    @Test
+    @DisplayName("Bukkit version is implemented correctly")
+    void noImplementationErrorsBukkit() {
+        new ExtensionExtractor(new RedProtectBukkitExtension()).validateAnnotations();
     }
 
-    private boolean isClassAvailable(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
-    public Optional<DataExtension> createExtension() {
-        if (!isAvailable()) {
-            return Optional.empty();
-        }
-        if (isClassAvailable("org.bukkit.event.EventHandler")) {
-            return Optional.of(new RedProtectBukkitExtension());
-        }
-        if (isClassAvailable("org.spongepowered.api.Sponge")) {
-            return Optional.of(new RedProtectSpongeExtension());
-        }
-        return Optional.empty();
-    }
 }
